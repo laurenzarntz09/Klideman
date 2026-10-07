@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klideman – Entwurf Webseite</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f3ee; --surface:#ffffff; --soft:#efe7dd; --ink:#1f1a17; --muted:#6b625b;
+    --brand:#7a4a2a; --brand-ink:#ffffff; --accent:#d9a441; --line:#e6ddd3;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){--bg:#1a1614;--surface:#241f1c;--soft:#2c2622;--ink:#f3ece5;--muted:#b3a89e;--line:#3a322d;--brand:#c07a4a}
+  }
+  :root[data-theme="dark"]{--bg:#1a1614;--surface:#241f1c;--soft:#2c2622;--ink:#f3ece5;--muted:#b3a89e;--line:#3a322d;--brand:#c07a4a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+  a{color:inherit}
+  .draft{background:#1f1a17;color:#f7f3ee;text-align:center;font-size:.8rem;padding:.45rem 1rem}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  section{padding:64px 0;scroll-margin-top:80px}
+  .eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);font-weight:600}
+  h2.sec{font-family:Fraunces,serif;font-size:clamp(1.6rem,3.5vw,2.2rem);line-height:1.2;margin:6px 0 24px}
+  .lead{color:var(--muted);max-width:40em;margin:-12px 0 28px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:14px;padding-bottom:14px}
+  .logo{font-family:Fraunces,serif;font-size:1.5rem;font-weight:700;color:var(--brand);text-decoration:none;line-height:1.1}
+  .logo span{display:block;font-family:Inter,sans-serif;font-size:.7rem;font-weight:500;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+  nav{display:flex;gap:20px;font-size:.92rem}
+  nav a{text-decoration:none;color:var(--muted)}
+  nav a:hover{color:var(--ink)}
+  .callbtn{background:var(--brand);color:var(--brand-ink);text-decoration:none;padding:.6rem 1rem;border-radius:10px;font-weight:600;white-space:nowrap;font-size:.92rem}
+  @media (max-width:820px){nav{display:none}}
+
+  /* Hero */
+  .hero{padding:72px 0 56px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+  .hero h1{font-family:Fraunces,serif;font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.08}
+  .hero p{color:var(--muted);font-size:1.1rem;margin-top:16px}
+  .hero .ctas{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .btn{display:inline-block;text-decoration:none;font-weight:600;padding:.8rem 1.2rem;border-radius:10px}
+  .btn.primary{background:var(--brand);color:var(--brand-ink)}
+  .btn.ghost{border:1px solid var(--line);background:var(--surface)}
+  .open-now{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:.92rem;color:var(--muted)}
+  .dot{width:10px;height:10px;border-radius:50%;background:#9a9a9a}
+  .dot.on{background:#3aa55d;box-shadow:0 0 0 4px rgba(58,165,93,.18)}
+  .photo{aspect-ratio:4/5;border-radius:20px;background:linear-gradient(160deg,var(--soft),var(--line));display:flex;align-items:flex-end;padding:20px;color:var(--muted);font-size:.9rem;position:relative;overflow:hidden}
+  .photo::before{content:"👞🔑";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:.35}
+  .rating-card{position:absolute;top:20px;left:20px;background:var(--surface);border-radius:12px;padding:10px 14px;box-shadow:0 8px 24px rgba(0,0,0,.08);font-size:.85rem;color:var(--ink)}
+  .rating-card b{font-size:1.2rem;color:var(--brand)}
+  @media (max-width:820px){.hero{grid-template-columns:1fr}.photo{aspect-ratio:16/10}}
+
+  /* Stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:0 0 8px}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center}
+  .stat b{display:block;font-family:Fraunces,serif;font-size:1.8rem;color:var(--brand)}
+  .stat span{color:var(--muted);font-size:.88rem}
+
+  /* Emergency */
+  .emergency{background:var(--brand);color:var(--brand-ink);border-radius:18px;padding:28px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+  .emergency h2{font-family:Fraunces,serif;font-size:1.6rem}
+  .emergency ul{margin-top:10px;padding-left:18px;opacity:.92}
+  .emergency a{background:var(--accent);color:#1f1a17;text-decoration:none;font-weight:600;padding:.9rem 1.3rem;border-radius:10px;text-align:center}
+  @media (max-width:640px){.emergency{grid-template-columns:1fr}}
+
+  /* Services tabs */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+  .tab{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.55rem 1rem;border-radius:999px;cursor:pointer;font:inherit;font-size:.92rem}
+  .tab[aria-selected="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+  .panel{display:none;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;grid-template-columns:1fr 1fr;gap:28px}
+  .panel.active{display:grid}
+  .panel h3{font-family:Fraunces,serif;font-size:1.4rem;margin-bottom:8px}
+  .panel p{color:var(--muted)}
+  .panel ul{list-style:none;display:grid;gap:8px}
+  .panel li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:8px}
+  .panel li span:last-child{color:var(--muted);white-space:nowrap}
+  .note{font-size:.8rem;color:var(--muted);margin-top:12px}
+  @media (max-width:720px){.panel.active{grid-template-columns:1fr}}
+
+  /* Process */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;counter-reset:s}
+  .step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;position:relative}
+  .step::before{counter-increment:s;content:counter(s);display:flex;width:34px;height:34px;border-radius:50%;background:var(--soft);color:var(--brand);font-weight:700;align-items:center;justify-content:center;margin-bottom:12px}
+  .step h3{font-size:1rem;margin-bottom:4px}
+  .step p{color:var(--muted);font-size:.92rem}
+
+  /* Before/after */
+  .ba{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .ba figure{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .ba .img{aspect-ratio:4/3;display:grid;grid-template-columns:1fr 1fr}
+  .ba .img div{display:flex;align-items:flex-end;justify-content:center;padding:8px;font-size:.75rem;color:var(--muted)}
+  .ba .img div:first-child{background:var(--line)}
+  .ba .img div:last-child{background:var(--soft)}
+  .ba figcaption{padding:14px 16px;font-size:.92rem}
+
+  /* About */
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .about .photo{aspect-ratio:1/1}
+  .about .photo::before{content:"🧰"}
+  @media (max-width:720px){.about{grid-template-columns:1fr}}
+
+  /* Reviews */
+  .reviews{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+  .big{font-family:Fraunces,serif;font-size:3.4rem;color:var(--brand);line-height:1}
+  .stars{color:var(--accent);letter-spacing:2px}
+  .placeholder{border:2px dashed var(--line);border-radius:12px;padding:18px;color:var(--muted);font-size:.92rem}
+  @media (max-width:600px){.reviews{grid-template-columns:1fr}}
+
+  /* FAQ */
+  details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:10px}
+  summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+  summary::after{content:"+";color:var(--brand);font-size:1.2rem}
+  details[open] summary::after{content:"–"}
+  details p{color:var(--muted);margin-top:10px}
+
+  /* Contact */
+  .contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .card h3{font-family:Fraunces,serif;font-size:1.25rem;margin-bottom:12px}
+  table{width:100%;border-collapse:collapse;font-size:.95rem}
+  td{padding:7px 0;border-bottom:1px dashed var(--line)}
+  td:last-child{text-align:right;color:var(--muted)}
+  tr.today td{color:var(--brand);font-weight:600}
+  .map{background:repeating-linear-gradient(45deg,var(--soft),var(--soft) 10px,var(--line) 10px,var(--line) 20px);border-radius:10px;height:170px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;margin-top:14px}
+
+  footer{border-top:1px solid var(--line);padding:28px 0 90px;color:var(--muted);font-size:.85rem}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  .mobilecall{position:fixed;bottom:16px;left:16px;right:16px;display:none;background:var(--brand);color:var(--brand-ink);text-align:center;padding:14px;border-radius:12px;font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+  @media (max-width:640px){.mobilecall{display:block}}
+</style>
+</head>
+<body>
+<div class="draft">Unverbindlicher Entwurf zur Ansicht – keine offizielle Seite von Klideman</div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">Klideman<span>Schuster &amp; Schlüsseldienst</span></a>
+    <nav>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#ueber">Über uns</a>
+      <a href="#faq">FAQ</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="callbtn" href="tel:+498930749888">📞 089 30749888</a>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">München · Herzog-Heinrich-Straße</div>
+      <h1>Schuhe, Schlüssel, Leder – repariert mit Handwerk und Herz.</h1>
+      <p>Ihr Schuster und Schlüsseldienst nahe dem Goetheplatz. Viele Arbeiten erledigen wir, während Sie kurz warten.</p>
+      <div class="ctas">
+        <a class="btn primary" href="tel:+498930749888">Jetzt anrufen</a>
+        <a class="btn ghost" href="#leistungen">Leistungen ansehen</a>
+      </div>
+      <div class="open-now"><span class="dot" id="dot"></span><span id="openText">Öffnungszeiten werden geprüft …</span></div>
+    </div>
+    <div class="photo">
+      <div class="rating-card"><b>★ 4,9</b> · über 130 Google-Bewertungen</div>
+      Platz für ein Foto Ihrer Werkstatt
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>4,9 ★</b><span>Google-Bewertung</span></div>
+    <div class="stat"><b>130+</b><span>zufriedene Bewertungen</span></div>
+    <div class="stat"><b>Sofort</b><span>Schlüssel in wenigen Minuten</span></div>
+    <div class="stat"><b>6 Tage</b><span>pro Woche geöffnet</span></div>
+  </div>
+
+  <section style="padding-bottom:0">
+    <div class="emergency">
+      <div>
+        <h2>Ausgesperrt oder Schlüssel abgebrochen?</h2>
+        <ul>
+          <li>Türöffnung durch unseren Schlüsselnotdienst</li>
+          <li>Schlosstausch direkt vor Ort</li>
+          <li>Abgebrochene Schlüssel – oft lässt sich daraus ein neuer anfertigen</li>
+        </ul>
+      </div>
+      <a href="tel:+498930749888">📞 Notdienst anrufen</a>
+    </div>
+  </section>
+
+  <section id="leistungen">
+    <div class="eyebrow">Was wir für Sie tun</div>
+    <h2 class="sec">Unsere Leistungen</h2>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-p="p1">👞 Schuhe</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p2">🔑 Schlüssel</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p3">👜 Leder &amp; Taschen</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p4">✒️ Gravur &amp; Stempel</button>
+    </div>
+
+    <div class="panel active" id="p1">
+      <div><h3>Schuhreparatur</h3><p>Ob Lieblingsstiefel, Business-Schuh oder Sneaker: Wir geben Ihren Schuhen ein zweites Leben – das spart Geld und schont die Umwelt.</p></div>
+      <ul><li><span>Absätze erneuern</span><span>ab XX €</span></li><li><span>Neue Sohle</span><span>ab XX €</span></li><li><span>Nähte &amp; Kappen</span><span>ab XX €</span></li><li><span>Reinigung &amp; Pflege</span><span>ab XX €</span></li></ul>
+    </div>
+    <div class="panel" id="p2">
+      <div><h3>Schlüsseldienst</h3><p>Nachschlüssel für Haus, Wohnung und Briefkasten, Sicherheitsschlüssel und Schlosstausch – viele Schlüssel fertigen wir in wenigen Minuten.</p></div>
+      <ul><li><span>Nachschlüssel</span><span>ab XX €</span></li><li><span>Sicherheitsschlüssel</span><span>ab XX €</span></li><li><span>Schlosstausch</span><span>auf Anfrage</span></li><li><span>Türöffnung</span><span>auf Anfrage</span></li></ul>
+    </div>
+    <div class="panel" id="p3">
+      <div><h3>Leder- und Taschenreparatur</h3><p>Gerissene Riemen, kaputte Reißverschlüsse oder gelöste Nähte an Taschen, Gürteln und Jacken – wir reparieren sorgfältig.</p></div>
+      <ul><li><span>Reißverschluss</span><span>ab XX €</span></li><li><span>Riemen &amp; Henkel</span><span>ab XX €</span></li><li><span>Gürtel kürzen / lochen</span><span>ab XX €</span></li><li><span>Nähte</span><span>ab XX €</span></li></ul>
+    </div>
+    <div class="panel" id="p4">
+      <div><h3>Gravur &amp; Stempel</h3><p>Persönliche Gravuren auf Schmuck, Uhren oder Holz, Namensschilder fürs Klingelbrett und Stempel im Schnelldienst.</p></div>
+      <ul><li><span>Gravur Schmuck / Uhr</span><span>ab XX €</span></li><li><span>Klingel- &amp; Briefkastenschild</span><span>ab XX €</span></li><li><span>Firmenstempel</span><span>ab XX €</span></li><li><span>Stempel-Schnelldienst</span><span>auf Anfrage</span></li></ul>
+    </div>
+    <p class="note">Preise sind Platzhalter und werden mit Ihnen abgestimmt.</p>
+  </section>
+
+  <section id="ablauf" style="padding-top:0">
+    <div class="eyebrow">So einfach geht's</div>
+    <h2 class="sec">In drei Schritten zur Reparatur</h2>
+    <div class="steps">
+      <div class="step"><h3>Vorbeibringen</h3><p>Ohne Termin – kommen Sie einfach während der Öffnungszeiten vorbei.</p></div>
+      <div class="step"><h3>Beraten lassen</h3><p>Wir schauen uns alles an und sagen Ihnen ehrlich, was sich lohnt und was es kostet.</p></div>
+      <div class="step"><h3>Abholen</h3><p>Schlüssel oft sofort, Schuhe und Leder meist nach kurzer Zeit.</p></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="eyebrow">Aus der Werkstatt</div>
+    <h2 class="sec">Vorher &amp; Nachher</h2>
+    <div class="ba">
+      <figure><div class="img"><div>vorher</div><div>nachher</div></div><figcaption>Neue Absätze für Lederstiefel</figcaption></figure>
+      <figure><div class="img"><div>vorher</div><div>nachher</div></div><figcaption>Gerissener Taschenriemen</figcaption></figure>
+      <figure><div class="img"><div>vorher</div><div>nachher</div></div><figcaption>Gravur auf einer Taschenuhr</figcaption></figure>
+    </div>
+    <p class="note">Hier kommen echte Fotos Ihrer Arbeiten hin.</p>
+  </section>
+
+  <section id="ueber" style="padding-top:0">
+    <div class="about">
+      <div class="photo">Platz für ein Foto von Ihnen</div>
+      <div>
+        <div class="eyebrow">Über uns</div>
+        <h2 class="sec">Handwerk aus dem Viertel</h2>
+        <p style="color:var(--muted)">Platz für Ihre Geschichte: Seit wann es die Werkstatt gibt, was Ihnen an Ihrer Arbeit wichtig ist und warum Ihre Kunden immer wiederkommen. Ein paar persönliche Sätze schaffen Vertrauen – gerade beim Schlüsseldienst, wo Kunden wissen wollen, wem sie ihre Tür anvertrauen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="eyebrow">Was Kunden sagen</div>
+    <h2 class="sec">Bewertungen</h2>
+    <div class="reviews">
+      <div><div class="big">4,9</div><div class="stars">★★★★★</div><div style="color:var(--muted);font-size:.9rem">über 130 Bewertungen auf Google</div></div>
+      <div class="placeholder">Hier werden Ihre echten Google-Bewertungen automatisch eingebunden.</div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top:0">
+    <div class="eyebrow">Häufige Fragen</div>
+    <h2 class="sec">FAQ</h2>
+    <details><summary>Brauche ich einen Termin?</summary><p>Nein, kommen Sie einfach während der Öffnungszeiten vorbei.</p></details>
+    <details><summary>Wie lange dauert ein Nachschlüssel?</summary><p>Viele Standardschlüssel sind in wenigen Minuten fertig. Bei Sicherheitsschlüsseln kann es länger dauern, wir sagen Ihnen vorab Bescheid.</p></details>
+    <details><summary>Lohnt sich die Reparatur meiner Schuhe?</summary><p>Bringen Sie sie vorbei – wir beraten Sie ehrlich, ob sich eine Reparatur lohnt.</p></details>
+    <details><summary>Kann ich mit Karte zahlen?</summary><p>Platzhalter – hier stehen Ihre Zahlungsmöglichkeiten.</p></details>
+    <details><summary>Was mache ich, wenn ich ausgesperrt bin?</summary><p>Rufen Sie uns unter 089 30749888 an. Wir besprechen am Telefon, wie wir Ihnen helfen können.</p></details>
+  </section>
+
+  <section id="kontakt" style="padding-top:0">
+    <div class="eyebrow">Besuchen Sie uns</div>
+    <h2 class="sec">Kontakt &amp; Öffnungszeiten</h2>
+    <div class="contact">
+      <div class="card">
+        <h3>Öffnungszeiten</h3>
+        <table id="hours">
+          <tr data-d="1"><td>Montag</td><td>9:00–12:30 · 14:30–18:30</td></tr>
+          <tr data-d="2"><td>Dienstag</td><td>9:00–12:30 · 14:30–18:30</td></tr>
+          <tr data-d="3"><td>Mittwoch</td><td>9:00–12:30 · 14:30–18:30</td></tr>
+          <tr data-d="4"><td>Donnerstag</td><td>9:00–12:30 · 14:30–18:30</td></tr>
+          <tr data-d="5"><td>Freitag</td><td>9:00–12:30 · 14:30–18:30</td></tr>
+          <tr data-d="6"><td>Samstag</td><td>9:00–14:00</td></tr>
+          <tr data-d="0"><td>Sonntag</td><td>geschlossen</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>So finden Sie uns</h3>
+        <p>Klideman<br>Herzog-Heinrich-Straße 31<br>80336 München</p>
+        <p style="margin-top:8px">📞 <a href="tel:+498930749888">089 30749888</a></p>
+        <div class="map">Hier: interaktive Karte mit Route</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Klideman · Herzog-Heinrich-Str. 31 · 80336 München</span>
+    <span>Impressum · Datenschutz</span>
+  </div>
+</footer>
+
+<a class="mobilecall" href="tel:+498930749888">📞 Jetzt anrufen: 089 30749888</a>
+
+<script>
+  // Tabs
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.addEventListener('click',()=>{
+      document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected','false'));
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      t.setAttribute('aria-selected','true');
+      document.getElementById(t.dataset.p).classList.add('active');
+    });
+  });
+
+  // Geöffnet / geschlossen (Münchner Zeit)
+  const hours={1:[[540,750],[870,1110]],2:[[540,750],[870,1110]],3:[[540,750],[870,1110]],4:[[540,750],[870,1110]],5:[[540,750],[870,1110]],6:[[540,840]],0:[]};
+  try{
+    const parts=new Intl.DateTimeFormat('de-DE',{timeZone:'Europe/Berlin',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+    const wd={'Mo':1,'Di':2,'Mi':3,'Do':4,'Fr':5,'Sa':6,'So':0}[parts.find(p=>p.type==='weekday').value.slice(0,2)];
+    const m=parseInt(parts.find(p=>p.type==='hour').value)*60+parseInt(parts.find(p=>p.type==='minute').value);
+    const open=(hours[wd]||[]).some(([a,b])=>m>=a&&m<b);
+    document.getElementById('dot').classList.toggle('on',open);
+    document.getElementById('openText').textContent=open?'Jetzt geöffnet':'Gerade geschlossen – Notdienst telefonisch';
+    const row=document.querySelector('#hours tr[data-d="'+wd+'"]'); if(row) row.classList.add('today');
+  }catch(e){document.getElementById('openText').textContent='Öffnungszeiten siehe unten';}
+</script>
+</body>
+</html>
